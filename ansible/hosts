@@ -1,0 +1,3 @@
+bot ansible_host=ip-vm1 ansible_user=ansible ansible_password=ansible
+db ansible_host=ip-vm2 ansible_user=ansible ansible_password=ansible
+db_repl ansible_host=ip-vm3 ansible_user=ansible ansible_password=ansible

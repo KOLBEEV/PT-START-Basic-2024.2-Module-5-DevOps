@@ -1,0 +1,406 @@
+- name: telegram_bot_test
+  hosts: bot
+  become: yes
+  
+  vars:
+    bot_directory: '/tmp/ptstart_bot'
+    bot_token: '7506583853:AAFR0f52LvSySPB3FdpFFyweHPSxv7TykF8'
+    chat_id: '1702982050'
+    
+    db_host: '{{ hostvars["db"]["ansible_host"] }}'
+    db_port: 5432
+    db_user: 'postgres'
+    db_password: '12345678'
+    db_database: 'db_emails_phones'
+    
+    rm_host: '{{ hostvars["db"]["ansible_host"] }}'
+    rm_port: 22
+    rm_user: 'kolbeev'
+    rm_password: '280200'
+
+  tasks:
+  
+    - name: Install prerequisites for adding new Python version
+      apt:
+        name:
+          - software-properties-common
+        state: present
+        update_cache: yes
+
+    - name: Add deadsnakes PPA (repository with newer Python 3.12 versions)
+      apt_repository:
+        repo: ppa:deadsnakes/ppa
+        state: present
+    
+    - name: Install Python 3.12
+      apt:
+        name: python3.12
+        state: present
+
+    - name: Install pip for Python 3.12
+      apt:
+        name: python3.12-venv
+        state: present
+
+    - name: Install development packages
+      apt:
+        name:
+          - libpq-dev
+          - python3.12-dev
+          - gcc
+        state: present
+        update_cache: yes
+
+    - name: Copy telegram_bot files to RM_HOST
+      copy:
+        src: ./bot/
+        dest: "{{ bot_directory }}"
+        mode: '0755'
+        owner: root
+        group: root
+
+    - name: Create virtual environment with Python 3.12
+      command: "python3.12 -m venv {{ bot_directory }}/venv"
+      
+    - name: Upgrade pip and setuptools with Python 3.12 directly
+      command: "{{ bot_directory }}/venv/bin/python3.12 -m pip install --upgrade pip setuptools"
+
+    - name: Install requirements
+      command: "{{ bot_directory }}/venv/bin/python3.12 -m pip install -r {{ bot_directory }}/requirements.txt"
+
+    - name: Create .env file on RM_HOST
+      copy:
+        dest: "{{ bot_directory }}/.env"
+        content: |
+          TM_TOKEN={{ bot_token }}
+          CHAT_ID={{ chat_id }}
+          
+          DB_HOST={{ db_host }}
+          DB_PORT={{ db_port }}
+          DB_USER={{ db_user }}
+          DB_PASSWORD={{ db_password }}
+          DB_DATABASE={{ db_database }}
+          
+          RM_HOST={{ rm_host }}
+          RM_PORT={{ rm_port }}
+          RM_USER={{ rm_user }}
+          RM_PASSWORD={{ rm_password }}
+
+    - name: Set permissions for .env file
+      file:
+        path: "{{ bot_directory }}/.env"
+        mode: '0600'
+
+    - name: Create service for telegram_bot
+      copy:
+        dest: /etc/systemd/system/telegram_bot.service
+        content: |
+          [Unit]
+          Description=Telegram Bot
+          After=network.target
+
+          [Service]
+          Type=simple
+          User={{ hostvars["bot"]["ansible_user"] }}
+          WorkingDirectory={{ bot_directory }}
+          EnvironmentFile={{ bot_directory }}/.env
+          ExecStart={{ bot_directory }}/venv/bin/python {{ bot_directory }}/telegram_bot.py
+          Restart=always
+
+          [Install]
+          WantedBy=multi-user.target
+
+    - name: Set permissions for telegram_bot.service
+      file:
+        path: /etc/systemd/system/telegram_bot.service
+        mode: '0644'
+        
+    - name: Change ownership for bot_directory
+      file:
+        path: '{{ bot_directory }}'
+        owner: '{{ hostvars["bot"]["ansible_user"] }}'
+        group: '{{ hostvars["bot"]["ansible_user"] }}'
+        recurse: yes
+
+    - name: Reload daemon
+      systemd:
+        daemon_reload: yes
+
+    - name: Check telegram_bot.service
+      systemd:
+        name: telegram_bot
+        state: started
+        enabled: yes
+
+- name: db-test  
+  hosts: db
+  become: yes
+  
+  vars:
+    postgres_version: '15'
+    db_name: 'db_emails_phones'
+    db_user: 'postgres'
+    db_password: '12345678'
+    replication_user: 'repl_user'
+    replication_password: '12345678'
+    log_directory: '/var/log/postgresql'
+    
+  tasks:
+
+    - name: Add PostgreSQL apt repo key
+      apt_key:
+        url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+        state: present
+
+    - name: Add PostgreSQL apt repo
+      apt_repository:
+        repo: "deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main"
+        state: present
+
+    - name: Update apt-cache
+      apt:
+        update_cache: yes
+
+    - name: Install PostgreSQL
+      apt:
+        name:
+          - "postgresql-{{ postgres_version }}"
+          - "postgresql-contrib-{{ postgres_version }}"
+        state: present
+
+    - name: Check PostgreSQL
+      service:
+        name: postgresql
+        state: started
+        enabled: yes
+        
+    - name: Configure postgresql.conf - listen_addresses
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+        regexp: '^#?(listen_addresses\s*=\s*).*'
+        line: "listen_addresses = '*'"
+        state: present
+
+    - name: Configure postgresql.conf - wal_level
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+        regexp: '^#?(wal_level\s*=\s*).*'
+        line: "wal_level = replica"
+        state: present
+
+    - name: Configure postgresql.conf - max_wal_senders
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+        regexp: '^#?(max_wal_senders\s*=\s*).*'
+        line: "max_wal_senders = 10"
+        state: present
+
+    - name: Configure postgresql.conf - wal_log_hints
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+        regexp: '^#?(wal_log_hints\s*=\s*).*'
+        line: "wal_log_hints = on"
+        state: present
+    
+    - name: Configure postgresql.conf - archive_mode
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+        regexp: '^#?(archive_mode\s*=\s*).*'
+        line: "archive_mode = on"
+        state: present
+
+    - name: Configure postgresql.conf - archive_command
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+        regexp: '^#?(archive_command\s*=\s*).*'
+        line: "archive_command = 'cp %p /oracle/pg_data/archive/%f'"
+        state: present
+    
+    - name: Configure postgresql.conf - hot_standby
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+        regexp: '^#?(hot_standby\s*=\s*).*'
+        line: "hot_standby = on"
+        state: present
+    
+    - name: Configure postgresql.conf - logging_collector
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+        regexp: '^#?(logging_collector\s*=\s*).*'
+        line: "logging_collector = off"
+        state: present
+    
+    - name: Configure postgresql.conf - log_connections
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+        regexp: '^#?(log_connections\s*=\s*).*'
+        line: "log_connections = on"
+        state: present
+    
+    - name: Configure postgresql.conf - log_disconnections
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+        regexp: '^#?(log_disconnections\s*=\s*).*'
+        line: "log_disconnections = on"
+        state: present
+    
+    - name: Configure postgresql.conf - log_replication_commands
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+        regexp: '^#?(log_replication_commands\s*=\s*).*'
+        line: "log_replication_commands = on"
+        state: present
+
+    - name: Configure pg_hba.conf - part 1
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/pg_hba.conf"
+        line: "host replication {{ replication_user }} 0.0.0.0/0 md5"
+        state: present
+
+    - name: Configure pg_hba.conf - part 2
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/pg_hba.conf"
+        line: "host    all             all             0.0.0.0/0               md5"
+        state: present
+
+    - name: Restart PostgreSQL
+      service:
+        name: postgresql
+        state: restarted
+
+    - name: Set postgres password
+      shell: |
+        sudo -u postgres psql -c "ALTER USER {{ db_user }} WITH PASSWORD '{{ db_password }}';"
+      become: yes
+
+    - name: Check database
+      shell: |
+        if ! sudo -u postgres psql -tc "SELECT 1 FROM pg_database WHERE datname = '{{ db_name }}'" | grep -q 1; then
+          sudo -u postgres createdb -O {{ db_user }} {{ db_name }}
+        fi
+      become: yes
+
+    - name: Check replication user
+      shell: |
+        if ! sudo -u postgres psql -tc "SELECT 1 FROM pg_roles WHERE rolname = '{{ replication_user }}'" | grep -q 1; then
+          sudo -u postgres psql -c "CREATE USER {{ replication_user }} REPLICATION LOGIN ENCRYPTED PASSWORD '{{ replication_password }}';"
+        fi
+      become: yes
+      
+    - name: Create emails and phones tables
+      shell: |
+        sudo -u postgres psql -d {{ db_name }} -c "
+        DROP TABLE IF EXISTS emails;
+        DROP TABLE IF EXISTS phones;
+        CREATE TABLE emails (
+            id SERIAL PRIMARY KEY,
+            mail VARCHAR(100) NOT NULL
+        );
+        CREATE TABLE phones (
+            id SERIAL PRIMARY KEY,
+            phone VARCHAR(100) NOT NULL
+        );"
+      become: yes
+
+    - name: Insert two records into emails and phones tables
+      shell: |
+        sudo -u postgres psql -d {{ db_name }} -c "
+        INSERT INTO emails (mail) VALUES
+        ('test1@mail.ru'),
+        ('test2@yandex.ru');
+        
+        INSERT INTO phones (phone) VALUES
+        ('+ 7 (978) 123-45-67'),
+        ('8 978 1234567');"
+      become: yes
+
+    - name: Set permissions for log_directory
+      file:
+        path: "{{ log_directory }}"
+        mode: '0644'
+        recurse: yes
+        owner: postgres
+        group: postgres
+
+    - name: Add ansible_user to postgres group
+      user:
+        name: "{{ ansible_user }}"
+        groups: postgres
+        append: yes
+
+- name: db_repl_test
+  hosts: db_repl
+  become: yes
+  
+  vars:
+    postgres_version: '15'
+    replication_user: 'repl_user'
+    replication_password: '12345678'
+    db_host: '{{ hostvars["db"]["ansible_host"] }}'
+    db_port: 5432
+    
+  tasks:
+
+    - name: Add PostgreSQL apt repo key
+      apt_key:
+        url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+        state: present
+
+    - name: Add PostgreSQL apt repo
+      apt_repository:
+        repo: "deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_distribution_release }}-pgdg main"
+        state: present
+
+    - name: Update apt-cache
+      apt:
+        update_cache: yes
+
+    - name: Install PostgreSQL
+      apt:
+        name:
+          - "postgresql-{{ postgres_version }}"
+          - "postgresql-contrib-{{ postgres_version }}"
+        state: present
+
+    - name: Stop PostgreSQL
+      service:
+        name: postgresql
+        state: stopped
+        
+    - name: Configure postgresql.conf - listen_addresses
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+        regexp: '^#?(listen_addresses\s*=\s*).*'
+        line: "listen_addresses = 'localhost'"
+        state: present
+    
+    - name: Configure postgresql.conf - unix_socket_directories
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+        regexp: '^#?(unix_socket_directories\s*=\s*).*'
+        line: "unix_socket_directories = '/var/run/postgresql'"
+        state: present
+    
+    - name: Configure postgresql.conf - port
+      lineinfile:
+        path: "/etc/postgresql/{{ postgres_version }}/main/postgresql.conf"
+        regexp: '^#?(port\s*=\s*).*'
+        line: "port = 5432"
+        state: present
+        
+    - name: Remove old data
+      file:
+        path: "/var/lib/postgresql/{{ postgres_version }}/main"
+        state: absent
+        force: yes
+
+    - name: Perform base backup for auto replication
+      shell: |
+        sudo -u postgres bash -c "PGPASSWORD='{{ replication_password }}' pg_basebackup -h {{ db_host }} -D /var/lib/postgresql/{{ postgres_version }}/main -U {{ replication_user }} -v --write-recovery-conf"
+      become: yes
+
+    - name: Start PostgreSQL
+      service:
+        name: postgresql
+        state: started
+        enabled: yes
