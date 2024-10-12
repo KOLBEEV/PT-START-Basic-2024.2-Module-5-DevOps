@@ -1,0 +1,52 @@
+version: '1'
+
+services:
+  db:
+    image: db_image
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: db_emails_phones
+    networks:
+      - app-network
+    ports:
+      - "5432:5432"
+    command: >
+      bash -c 'mkdir -p /oracle/pg_data/archive && chown -R postgres:postgres /oracle/pg_data/archive && service ssh start && docker-entrypoint.sh postgres'
+
+  bot:
+    image: bot_image
+    container_name: telegram_bot
+    environment:
+      DATABASE_HOST: db
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: 12345678
+      DATABASE_NAME: db_emails_phones
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+  db_repl:
+    image: db_repl_image
+    container_name: postgres_db_repl
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: db_emails_phones
+    networks:
+      - app-network
+    depends_on:
+      - db
+    ports:
+      - "80:5432"
+    command: >
+      bash -c 'sleep 5 && rm -rf /var/lib/postgresql/data/* && PGPASSWORD="12345678" pg_basebackup -h db -D /var/lib/postgresql/data -U postgres -v --write-recovery-conf && docker-entrypoint.sh postgres'
+
+networks:
+  app-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.0.0/24
