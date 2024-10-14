@@ -2,7 +2,7 @@ version: '1'
 
 services:
   db:
-    image: db_image
+    image: 172.16.63.137:5000/db_image
     container_name: postgres_db
     environment:
       POSTGRES_USER: postgres
@@ -16,20 +16,22 @@ services:
       bash -c 'mkdir -p /oracle/pg_data/archive && chown -R postgres:postgres /oracle/pg_data/archive && service ssh start && docker-entrypoint.sh postgres'
 
   bot:
-    image: bot_image
+    image: 172.16.63.137:5000/bot_image
     container_name: telegram_bot
     environment:
       DATABASE_HOST: db
       DATABASE_USER: postgres
       DATABASE_PASSWORD: 12345678
       DATABASE_NAME: db_emails_phones
+    volumes:
+      - ./.env:/app/.env
     networks:
       - app-network
     depends_on:
       - db
 
   db_repl:
-    image: db_repl_image
+    image: 172.16.63.137:5000/db_repl_image
     container_name: postgres_db_repl
     environment:
       POSTGRES_USER: postgres
