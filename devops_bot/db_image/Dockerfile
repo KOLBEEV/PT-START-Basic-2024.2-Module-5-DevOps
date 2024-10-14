@@ -29,3 +29,4 @@ COPY ./psql_configs/. /var/lib/postgresql/data/
 
 # Запуск PostgreSQL и SSH
 CMD service ssh start && docker-entrypoint.sh postgres
+
