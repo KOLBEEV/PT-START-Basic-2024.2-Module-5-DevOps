@@ -13,13 +13,22 @@ services:
     ports:
       - "5432:5432"
     command: >
-      bash -c 'mkdir -p /oracle/pg_data/archive && 
-      chown -R postgres:postgres /oracle/pg_data/archive && 
-      chown -R postgres:postgres /var/lib/postgresql/data && 
-      echo "host replication postgres 0.0.0.0/0 md5" >> /var/lib/postgresql/data/pg_hba.conf && 
-      echo "host all all 0.0.0.0/0 md5" >> /var/lib/postgresql/data/pg_hba.conf && 
+      bash -c '
+      mkdir -p /oracle/pg_data/archive && 
+      chown -R postgres:postgres /oracle/pg_data/archive &&
       service ssh start && 
-      docker-entrypoint.sh postgres'
+      docker-entrypoint.sh postgres
+      -c "wal_level=replica"
+      -c "wal_log_hints=on"
+      -c "archive_mode=on"
+      -c "max_wal_senders=10"
+      -c "hot_standby=on"
+      -c "logging_collector=on"
+      -c "log_directory=/var/log/postgresql"
+      -c "log_connections=on"
+      -c "log_disconnections=off"
+      -c "log_replication_commands=on"
+      '
       
   bot:
     image: 172.16.63.137:5000/bot_image
