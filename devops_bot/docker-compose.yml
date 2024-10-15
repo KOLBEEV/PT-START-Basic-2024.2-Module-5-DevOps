@@ -13,8 +13,14 @@ services:
     ports:
       - "5432:5432"
     command: >
-      bash -c 'mkdir -p /oracle/pg_data/archive && chown -R postgres:postgres /oracle/pg_data/archive && service ssh start && docker-entrypoint.sh postgres'
-
+      bash -c 'mkdir -p /oracle/pg_data/archive && 
+      chown -R postgres:postgres /oracle/pg_data/archive && 
+      chown -R postgres:postgres /var/lib/postgresql/data && 
+      echo "host replication postgres 0.0.0.0/0 md5" >> /var/lib/postgresql/data/pg_hba.conf && 
+      echo "host all all 0.0.0.0/0 md5" >> /var/lib/postgresql/data/pg_hba.conf && 
+      service ssh start && 
+      docker-entrypoint.sh postgres'
+      
   bot:
     image: 172.16.63.137:5000/bot_image
     container_name: telegram_bot
@@ -41,10 +47,12 @@ services:
       - app-network
     depends_on:
       - db
+    restart: always
     ports:
       - "80:5432"
     command: >
-      bash -c 'sleep 5 && rm -rf /var/lib/postgresql/data/* && PGPASSWORD="12345678" pg_basebackup -h db -D /var/lib/postgresql/data -U postgres -v --write-recovery-conf && docker-entrypoint.sh postgres'
+      bash -c 'sleep 5 && 
+      rm -rf /var/lib/postgresql/data/* && PGPASSWORD="12345678" pg_basebackup -h db -D /var/lib/postgresql/data -U postgres -v --write-recovery-conf && docker-entrypoint.sh postgres'
 
 networks:
   app-network:
