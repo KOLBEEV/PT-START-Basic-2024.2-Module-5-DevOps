@@ -24,7 +24,7 @@ from telegram.error import BadRequest
 
 
 class DotDict(dict):
-    """Позволяет обращаться к элементам словаря через точку."""
+    """ÐŸÐ¾Ð·Ð²Ð¾Ð»ÑÐµÑ‚ Ð¾Ð±Ñ€Ð°Ñ‰Ð°Ñ‚ÑŒÑÑ Ðº ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°Ð¼ ÑÐ»Ð¾Ð²Ð°Ñ€Ñ Ñ‡ÐµÑ€ÐµÐ· Ñ‚Ð¾Ñ‡ÐºÑƒ."""
     __getattr__ = dict.get
     __setattr__ = dict.__setitem__
     __delattr__ = dict.__delitem__
@@ -80,7 +80,7 @@ class TelegramBot:
                                         }
                                 ),
 
-                        ### 1. Поиск информации в тексте и её вывод.
+                        ### 1. ÐŸÐ¾Ð¸ÑÐº Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð² Ñ‚ÐµÐºÑÑ‚Ðµ Ð¸ ÐµÑ‘ Ð²Ñ‹Ð²Ð¾Ð´.
                         'findEmails'        : DotDict(
                                 {
                                         'command'    : 'find_email',
@@ -114,7 +114,7 @@ class TelegramBot:
                                         }
                                 ),
 
-                        ### 2. Проверка сложности пароля регулярным выражением.
+                        ### 2. ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° ÑÐ»Ð¾Ð¶Ð½Ð¾ÑÑ‚Ð¸ Ð¿Ð°Ñ€Ð¾Ð»Ñ Ñ€ÐµÐ³ÑƒÐ»ÑÑ€Ð½Ñ‹Ð¼ Ð²Ñ‹Ñ€Ð°Ð¶ÐµÐ½Ð¸ÐµÐ¼.
                         'verifyPassword'    : DotDict(
                                 {
                                         'command'    : 'verify_password',
@@ -123,11 +123,11 @@ class TelegramBot:
                                         'callback'   : self.command_VerifyPassword,
                                         }
                                 ),
-                        ### 3. Мониторинг Linux-системы.
+                        ### 3. ÐœÐ¾Ð½Ð¸Ñ‚Ð¾Ñ€Ð¸Ð½Ð³ Linux-ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹.
 
-                        ## 3.1. Сбор информации о системе.
+                        ## 3.1. Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ ÑÐ¸ÑÑ‚ÐµÐ¼Ðµ.
 
-                        # 3.1.1. О релизе.
+                        # 3.1.1. Ðž Ñ€ÐµÐ»Ð¸Ð·Ðµ.
                         'getRelease'        : DotDict(
                                 {
                                         'command'    : 'get_release',
@@ -137,7 +137,7 @@ class TelegramBot:
                                         }
                                 ),
 
-                        # 3.1.2. Об архитектуры процессора, имени хоста системы и версии ядра.
+                        # 3.1.2. ÐžÐ± Ð°Ñ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ñ‹ Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐ¾Ñ€Ð°, Ð¸Ð¼ÐµÐ½Ð¸ Ñ…Ð¾ÑÑ‚Ð° ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹ Ð¸ Ð²ÐµÑ€ÑÐ¸Ð¸ ÑÐ´Ñ€Ð°.
                         'getUname'          : DotDict(
                                 {
                                         'command'    : 'get_uname',
@@ -147,7 +147,7 @@ class TelegramBot:
                                         }
                                 ),
 
-                        # 3.1.3. О времени работы.
+                        # 3.1.3. Ðž Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹.
                         'getUptime'         : DotDict(
                                 {
                                         'command'    : 'get_uptime',
@@ -157,7 +157,7 @@ class TelegramBot:
                                         }
                                 ),
 
-                        ## 3.2. Сбор информации о состоянии файловой системы.
+                        ## 3.2. Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ð¸ Ñ„Ð°Ð¹Ð»Ð¾Ð²Ð¾Ð¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹.
                         'getDF'             : DotDict(
                                 {
                                         'command'    : 'get_df',
@@ -167,7 +167,7 @@ class TelegramBot:
                                         }
                                 ),
 
-                        ## 3.3. Сбор информации о состоянии оперативной памяти.
+                        ## 3.3. Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ð¸ Ð¾Ð¿ÐµÑ€Ð°Ñ‚Ð¸Ð²Ð½Ð¾Ð¹ Ð¿Ð°Ð¼ÑÑ‚Ð¸.
                         'getFree'           : DotDict(
                                 {
                                         'command'    : 'get_free',
@@ -177,7 +177,7 @@ class TelegramBot:
                                         }
                                 ),
 
-                        ## 3.4. Сбор информации о производительности системы.
+                        ## 3.4. Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚Ð¸ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹.
                         'getMpstat'         : DotDict(
                                 {
                                         'command'    : 'get_mpstat',
@@ -187,7 +187,7 @@ class TelegramBot:
                                         }
                                 ),
 
-                        ## 3.5. Сбор информации о работающих в данной системе пользователях.
+                        ## 3.5. Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÑŽÑ‰Ð¸Ñ… Ð² Ð´Ð°Ð½Ð½Ð¾Ð¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑÑ….
                         'getW'              : DotDict(
                                 {
                                         'command'    : 'get_w',
@@ -197,9 +197,9 @@ class TelegramBot:
                                         }
                                 ),
 
-                        ## 3.6. Сбор логов.
+                        ## 3.6. Ð¡Ð±Ð¾Ñ€ Ð»Ð¾Ð³Ð¾Ð².
 
-                        # 3.6.1. Последние 10 входов в систему.
+                        # 3.6.1. ÐŸÐ¾ÑÐ»ÐµÐ´Ð½Ð¸Ðµ 10 Ð²Ñ…Ð¾Ð´Ð¾Ð² Ð² ÑÐ¸ÑÑ‚ÐµÐ¼Ñƒ.
                         'getAuths'          : DotDict(
                                 {
                                         'command'    : 'get_auths',
@@ -208,7 +208,7 @@ class TelegramBot:
                                         'callback'   : self.command_GetAuths,
                                         }
                                 ),
-                        # 3.6.2. Последние 5 критических событий.
+                        # 3.6.2. ÐŸÐ¾ÑÐ»ÐµÐ´Ð½Ð¸Ðµ 5 ÐºÑ€Ð¸Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹.
                         'getCritical'       : DotDict(
                                 {
                                         'command'    : 'get_critical',
@@ -218,7 +218,7 @@ class TelegramBot:
                                         }
                                 ),
 
-                        ## 3.7 Сбор информации о запущенных процессах.
+                        ## 3.7 Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ Ð·Ð°Ð¿ÑƒÑ‰ÐµÐ½Ð½Ñ‹Ñ… Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐ°Ñ….
                         'getPS'             : DotDict(
                                 {
                                         'command'    : 'get_ps',
@@ -228,7 +228,7 @@ class TelegramBot:
                                         }
                                 ),
 
-                        ## 3.8 Сбор информации об используемых портах.
+                        ## 3.8 Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾Ð± Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÐ¼Ñ‹Ñ… Ð¿Ð¾Ñ€Ñ‚Ð°Ñ….
                         'getSS'             : DotDict(
                                 {
                                         'command'    : 'get_ss',
@@ -238,7 +238,7 @@ class TelegramBot:
                                         }
                                 ),
 
-                        ## 3.9 Сбор информации об установленных пакетах.
+                        ## 3.9 Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾Ð± ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð½Ñ‹Ñ… Ð¿Ð°ÐºÐµÑ‚Ð°Ñ….
                         'getAptList'        : DotDict(
                                 {
                                         'command'    : 'get_apt_list',
@@ -263,7 +263,7 @@ class TelegramBot:
                                         'callback'   : self.command_GetOnePackageInfo,
                                         }
                                 ),
-                        ## 3.10 Сбор информации о запущенных сервисах.
+                        ## 3.10 Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ Ð·Ð°Ð¿ÑƒÑ‰ÐµÐ½Ð½Ñ‹Ñ… ÑÐµÑ€Ð²Ð¸ÑÐ°Ñ….
                         'getServices'       : DotDict(
                                 {
                                         'command'    : 'get_services',
@@ -272,7 +272,7 @@ class TelegramBot:
                                         'callback'   : self.command_GetServices,
                                         },
                                 ),
-                        ## 3.10 Сбор информации о запущенных сервисах.
+                        ## Ð¡Ð±Ð¾Ñ€ Ð»Ð¾Ð³Ð¾Ð² Ð¾ Ñ€ÐµÐ¿Ð»Ð¸ÐºÐ°Ñ†Ð¸Ð¸ Ð¸Ð· /var/log/postgresql/ Master-ÑÐµÑ€Ð²ÐµÑ€Ð°..
                         'getReplLogs'       : DotDict(
                                 {
                                         'command'    : 'get_repl_logs',
@@ -281,12 +281,28 @@ class TelegramBot:
                                         'callback'   : self.command_GetReplLogs,
                                         },
                                 ),
+                        'getEmails'       : DotDict(
+                                {
+                                        'command'    : 'get_emails',
+                                        'button'     : '/get_emails',
+                                        'state_point': 'get_emails',
+                                        'callback'   : self.command_GetEmails,
+                                        },
+                                ),
+                        'getPhones'       : DotDict(
+                                {
+                                        'command'    : 'get_phones',
+                                        'button'     : '/get_phones',
+                                        'state_point': 'get_phones',
+                                        'callback'   : self.command_GetPhones,
+                                        },
+                                ),
                         }
                 )
 
         logger.info(f'Stop {self.__init__.__name__}')
 
-    # Функция для создания кнопок основных запросов
+    # Ð¤ÑƒÐ½ÐºÑ†Ð¸Ñ Ð´Ð»Ñ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ ÐºÐ½Ð¾Ð¿Ð¾Ðº Ð¾ÑÐ½Ð¾Ð²Ð½Ñ‹Ñ… Ð·Ð°Ð¿Ñ€Ð¾ÑÐ¾Ð²
     def keyboard_menu_main(self):
         logger.info(f'Start {self.keyboard_menu_main.__name__}')
 
@@ -311,10 +327,12 @@ class TelegramBot:
                         [KeyboardButton(self.commands.getAptList.button)],
                         [KeyboardButton(self.commands.getServices.button)],
                         [KeyboardButton(self.commands.getReplLogs.button)],
+                        [KeyboardButton(self.commands.getEmails.button)],
+                        [KeyboardButton(self.commands.getPhones.button)],
                         ], resize_keyboard=True
                 )
 
-    # Функция для создания кнопки отмены запроса
+    # Ð¤ÑƒÐ½ÐºÑ†Ð¸Ñ Ð´Ð»Ñ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ ÐºÐ½Ð¾Ð¿ÐºÐ¸ Ð¾Ñ‚Ð¼ÐµÐ½Ñ‹ Ð·Ð°Ð¿Ñ€Ð¾ÑÐ°
     def keyboard_menu_cancel(self):
         logger.info(f'Start {self.keyboard_menu_cancel.__name__}')
         return ReplyKeyboardMarkup(
@@ -356,107 +374,107 @@ class TelegramBot:
         if update:
             user = update.effective_user
             update.message.reply_text(
-                    f'Привет, {user.full_name}!',
-                    reply_markup=self.keyboard_menu_main()  # Отправляем клавиатуру с кнопками
+                    f'ÐŸÑ€Ð¸Ð²ÐµÑ‚, {user.full_name}!',
+                    reply_markup=self.keyboard_menu_main()  # ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÐ¼ ÐºÐ»Ð°Ð²Ð¸Ð°Ñ‚ÑƒÑ€Ñƒ Ñ ÐºÐ½Ð¾Ð¿ÐºÐ°Ð¼Ð¸
                     )
         else:
             context.bot.send_message(
                     chat_id=self.__chat_id,
-                    text="Бот запущен!",
+                    text="Ð‘Ð¾Ñ‚ Ð·Ð°Ð¿ÑƒÑ‰ÐµÐ½!",
                     reply_markup=self.keyboard_menu_main()
                     )
         logger.info(f'Stop {self.command_Start.__name__}')
 
     def command_Cancel(self, update: Update, context):
         logger.info(f'Start {self.command_Cancel.__name__}')
-        update.message.reply_text('Запрос отменен.', reply_markup=self.keyboard_menu_main())
+        update.message.reply_text('Ð—Ð°Ð¿Ñ€Ð¾Ñ Ð¾Ñ‚Ð¼ÐµÐ½ÐµÐ½.', reply_markup=self.keyboard_menu_main())
         logger.info(f'Stop {self.command_Cancel.__name__}')
         return ConversationHandler.END
 
     def command_Help(self, update: Update, context):
         logger.info(f'Start {self.command_Help.__name__}')
         text = (
-                "В боте реализован функционал поиска необходимой информации и вывода её пользователю.\n"
+                "Ð’ Ð±Ð¾Ñ‚Ðµ Ñ€ÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¾Ð½Ð°Ð» Ð¿Ð¾Ð¸ÑÐºÐ° Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾Ð¹ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¸ Ð²Ñ‹Ð²Ð¾Ð´Ð° ÐµÑ‘ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŽ.\n"
 
-                "1. Информация, которую бот умеет выделять из текста:\n"
-                "а) Email-адреса.\n"
-                "Команда: /find_email\n"
-                "Найденные почтовые аккаунты могут быть добавлены в базу данных.\n"
-                "б) Номера телефонов.\n"
-                "Команда: /find_phone_number\n"
-                "Найденные телефонные номера могут быть добавлены в базу данных.\n"
+                "1. Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ, ÐºÐ¾Ñ‚Ð¾Ñ€ÑƒÑŽ Ð±Ð¾Ñ‚ ÑƒÐ¼ÐµÐµÑ‚ Ð²Ñ‹Ð´ÐµÐ»ÑÑ‚ÑŒ Ð¸Ð· Ñ‚ÐµÐºÑÑ‚Ð°:\n"
+                "Ð°) Email-Ð°Ð´Ñ€ÐµÑÐ°.\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /find_email\n"
+                "ÐÐ°Ð¹Ð´ÐµÐ½Ð½Ñ‹Ðµ Ð¿Ð¾Ñ‡Ñ‚Ð¾Ð²Ñ‹Ðµ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚Ñ‹ Ð¼Ð¾Ð³ÑƒÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ñ‹ Ð² Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð½Ñ‹Ñ….\n"
+                "Ð±) ÐÐ¾Ð¼ÐµÑ€Ð° Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð¾Ð².\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /find_phone_number\n"
+                "ÐÐ°Ð¹Ð´ÐµÐ½Ð½Ñ‹Ðµ Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð½Ñ‹Ðµ Ð½Ð¾Ð¼ÐµÑ€Ð° Ð¼Ð¾Ð³ÑƒÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ñ‹ Ð² Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð½Ñ‹Ñ….\n"
 
-                "2. Проверка сложности пароля регулярным выражением.\n"
-                "В боте реализован функционал проверки сложности пароль с использованием регулярного выражения.\n"
-                "Команда: /verify_password\n"
+                "2. ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° ÑÐ»Ð¾Ð¶Ð½Ð¾ÑÑ‚Ð¸ Ð¿Ð°Ñ€Ð¾Ð»Ñ Ñ€ÐµÐ³ÑƒÐ»ÑÑ€Ð½Ñ‹Ð¼ Ð²Ñ‹Ñ€Ð°Ð¶ÐµÐ½Ð¸ÐµÐ¼.\n"
+                "Ð’ Ð±Ð¾Ñ‚Ðµ Ñ€ÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¾Ð½Ð°Ð» Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¸ ÑÐ»Ð¾Ð¶Ð½Ð¾ÑÑ‚Ð¸ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ Ñ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸ÐµÐ¼ Ñ€ÐµÐ³ÑƒÐ»ÑÑ€Ð½Ð¾Ð³Ð¾ Ð²Ñ‹Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ.\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /verify_password\n"
 
-                "3. Мониторинг Linux-системы\n"
-                "Бот реализовывает функционал для мониторинга Linux системы.\n"
-                "Для этого устанавливается SSH-подключение к удаленному серверу\n"
-                "3.1 Сбор информации о системе:\n"
-                "3.1.1 О релизе.\n"
-                "Команда: /get_release\n"
-                "3.1.2 Об архитектуры процессора, имени хоста системы и версии ядра.\n"
-                "Команда: /get_uname\n"
-                "3.1.3 О времени работы.\n"
-                "Команда: /get_uptime\n"
-                "3.2 Сбор информации о состоянии файловой системы.\n"
-                "Команда: /get_df\n"
-                "3.3 Сбор информации о состоянии оперативной памяти.\n"
-                "Команда: /get_free\n"
-                "3.4 Сбор информации о производительности системы.\n"
-                "Команда: /get_mpstat\n"
-                "3.5 Сбор информации о работающих в данной системе пользователях.\n"
-                "Команда: /get_w\n"
-                "3.6 Сбор логов\n"
-                "3.6.1 Последние 10 входов в систему.\n"
-                "Команда: /get_auths\n"
-                "3.6.2 Последние 5 критических событий.\n"
-                "Команда: /get_critical\n"
-                "3.7 Сбор информации о запущенных процессах.\n"
-                "Команда: /get_ps\n"
-                "3.8 Сбор информации об используемых портах.\n"
-                "Команда: /get_ss\n"
-                "3.9 Сбор информации об установленных пакетах.\n"
-                "Команда: /get_apt_list\n"
-                "Вывод всех пакетов:\n"
-                "команда: /get_apt_list, потом /get_all_packages\n"
-                "Поиск информации о пакете, название которого будет запрошено у пользователя:\n"
-                "команда: /get_apt_list, потом /get_one_package\n"
-                "3.10 Сбор информации о запущенных сервисах.\n"
-                "Команда: /get_services\n"
-                "Сбор логов о репликации из /var/log/postgresql/ Master-сервера.\n"
-                "Команда: /get_repl_logs\n"
+                "3. ÐœÐ¾Ð½Ð¸Ñ‚Ð¾Ñ€Ð¸Ð½Ð³ Linux-ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹\n"
+                "Ð‘Ð¾Ñ‚ Ñ€ÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ñ‹Ð²Ð°ÐµÑ‚ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¾Ð½Ð°Ð» Ð´Ð»Ñ Ð¼Ð¾Ð½Ð¸Ñ‚Ð¾Ñ€Ð¸Ð½Ð³Ð° Linux ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹.\n"
+                "Ð”Ð»Ñ ÑÑ‚Ð¾Ð³Ð¾ ÑƒÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÑ‚ÑÑ SSH-Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ðº ÑƒÐ´Ð°Ð»ÐµÐ½Ð½Ð¾Ð¼Ñƒ ÑÐµÑ€Ð²ÐµÑ€Ñƒ\n"
+                "3.1 Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ ÑÐ¸ÑÑ‚ÐµÐ¼Ðµ:\n"
+                "3.1.1 Ðž Ñ€ÐµÐ»Ð¸Ð·Ðµ.\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_release\n"
+                "3.1.2 ÐžÐ± Ð°Ñ€Ñ…Ð¸Ñ‚ÐµÐºÑ‚ÑƒÑ€Ñ‹ Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐ¾Ñ€Ð°, Ð¸Ð¼ÐµÐ½Ð¸ Ñ…Ð¾ÑÑ‚Ð° ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹ Ð¸ Ð²ÐµÑ€ÑÐ¸Ð¸ ÑÐ´Ñ€Ð°.\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_uname\n"
+                "3.1.3 Ðž Ð²Ñ€ÐµÐ¼ÐµÐ½Ð¸ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹.\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_uptime\n"
+                "3.2 Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ð¸ Ñ„Ð°Ð¹Ð»Ð¾Ð²Ð¾Ð¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹.\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_df\n"
+                "3.3 Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸Ð¸ Ð¾Ð¿ÐµÑ€Ð°Ñ‚Ð¸Ð²Ð½Ð¾Ð¹ Ð¿Ð°Ð¼ÑÑ‚Ð¸.\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_free\n"
+                "3.4 Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ Ð¿Ñ€Ð¾Ð¸Ð·Ð²Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ÑÑ‚Ð¸ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹.\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_mpstat\n"
+                "3.5 Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÑŽÑ‰Ð¸Ñ… Ð² Ð´Ð°Ð½Ð½Ð¾Ð¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑÑ….\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_w\n"
+                "3.6 Ð¡Ð±Ð¾Ñ€ Ð»Ð¾Ð³Ð¾Ð²\n"
+                "3.6.1 ÐŸÐ¾ÑÐ»ÐµÐ´Ð½Ð¸Ðµ 10 Ð²Ñ…Ð¾Ð´Ð¾Ð² Ð² ÑÐ¸ÑÑ‚ÐµÐ¼Ñƒ.\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_auths\n"
+                "3.6.2 ÐŸÐ¾ÑÐ»ÐµÐ´Ð½Ð¸Ðµ 5 ÐºÑ€Ð¸Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… ÑÐ¾Ð±Ñ‹Ñ‚Ð¸Ð¹.\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_critical\n"
+                "3.7 Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ Ð·Ð°Ð¿ÑƒÑ‰ÐµÐ½Ð½Ñ‹Ñ… Ð¿Ñ€Ð¾Ñ†ÐµÑÑÐ°Ñ….\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_ps\n"
+                "3.8 Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾Ð± Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÐµÐ¼Ñ‹Ñ… Ð¿Ð¾Ñ€Ñ‚Ð°Ñ….\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_ss\n"
+                "3.9 Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾Ð± ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð½Ñ‹Ñ… Ð¿Ð°ÐºÐµÑ‚Ð°Ñ….\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_apt_list\n"
+                "Ð’Ñ‹Ð²Ð¾Ð´ Ð²ÑÐµÑ… Ð¿Ð°ÐºÐµÑ‚Ð¾Ð²:\n"
+                "ÐºÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_apt_list, Ð¿Ð¾Ñ‚Ð¾Ð¼ /get_all_packages\n"
+                "ÐŸÐ¾Ð¸ÑÐº Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ Ð¿Ð°ÐºÐµÑ‚Ðµ, Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ð±ÑƒÐ´ÐµÑ‚ Ð·Ð°Ð¿Ñ€Ð¾ÑˆÐµÐ½Ð¾ Ñƒ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ:\n"
+                "ÐºÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_apt_list, Ð¿Ð¾Ñ‚Ð¾Ð¼ /get_one_package\n"
+                "3.10 Ð¡Ð±Ð¾Ñ€ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ Ð·Ð°Ð¿ÑƒÑ‰ÐµÐ½Ð½Ñ‹Ñ… ÑÐµÑ€Ð²Ð¸ÑÐ°Ñ….\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_services\n"
+                "Ð¡Ð±Ð¾Ñ€ Ð»Ð¾Ð³Ð¾Ð² Ð¾ Ñ€ÐµÐ¿Ð»Ð¸ÐºÐ°Ñ†Ð¸Ð¸ Ð¸Ð· /var/log/postgresql/ Master-ÑÐµÑ€Ð²ÐµÑ€Ð°.\n"
+                "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: /get_repl_logs\n"
         )
         update.message.reply_text(text, reply_markup=self.keyboard_menu_main())
         logger.info(f'Stop {self.command_Help.__name__}')
 
     def command_FindEmails(self, update: Update, context):
         """
-        Бот вывод список найденных email-адресов
+        Ð‘Ð¾Ñ‚ Ð²Ñ‹Ð²Ð¾Ð´ ÑÐ¿Ð¸ÑÐ¾Ðº Ð½Ð°Ð¹Ð´ÐµÐ½Ð½Ñ‹Ñ… email-Ð°Ð´Ñ€ÐµÑÐ¾Ð²
         """
         logger.info(f'Start {self.command_FindEmails.__name__}')
-        update.message.reply_text('Введите текст для поиска email-адресов: ',
+        update.message.reply_text('Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‚ÐµÐºÑÑ‚ Ð´Ð»Ñ Ð¿Ð¾Ð¸ÑÐºÐ° email-Ð°Ð´Ñ€ÐµÑÐ¾Ð²: ',
                                   reply_markup=self.keyboard_menu_cancel()
-                                  # Кнопка для отмены поиска
+                                  # ÐšÐ½Ð¾Ð¿ÐºÐ° Ð´Ð»Ñ Ð¾Ñ‚Ð¼ÐµÐ½Ñ‹ Ð¿Ð¾Ð¸ÑÐºÐ°
                                   )
         logger.info(f'Stop {self.command_FindEmails.__name__}')
         return self.commands.findEmails.state_point
 
     def findEmails(self, update: Update, context):
         logger.info(f'Start {self.findEmails.__name__}')
-        user_input = update.message.text  # Получаем текст, содержащий (или нет) email-адреса
-        emailsRegex = re.compile(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}')  # формат email-адресов
-        emailsList = emailsRegex.findall(user_input)  # Ищем номера телефонов
-        if not emailsList:  # Обрабатываем случай, когда номеров телефонов нет
-            update.message.reply_text('Email-адреса не найдены', reply_markup=self.keyboard_menu_cancel())
-            return  # Завершаем выполнение функции
+        user_input = update.message.text  # ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ñ‚ÐµÐºÑÑ‚, ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‰Ð¸Ð¹ (Ð¸Ð»Ð¸ Ð½ÐµÑ‚) email-Ð°Ð´Ñ€ÐµÑÐ°
+        emailsRegex = re.compile(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}')  # Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚ email-Ð°Ð´Ñ€ÐµÑÐ¾Ð²
+        emailsList = emailsRegex.findall(user_input)  # Ð˜Ñ‰ÐµÐ¼ Ð½Ð¾Ð¼ÐµÑ€Ð° Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð¾Ð²
+        if not emailsList:  # ÐžÐ±Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°ÐµÐ¼ ÑÐ»ÑƒÑ‡Ð°Ð¹, ÐºÐ¾Ð³Ð´Ð° Ð½Ð¾Ð¼ÐµÑ€Ð¾Ð² Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð¾Ð² Ð½ÐµÑ‚
+            update.message.reply_text('Email-Ð°Ð´Ñ€ÐµÑÐ° Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ñ‹', reply_markup=self.keyboard_menu_cancel())
+            return  # Ð—Ð°Ð²ÐµÑ€ÑˆÐ°ÐµÐ¼ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸
         self.emails = '\n'.join([f'{emailsList[i]}' for i in range(len(emailsList))])
         emails = '\n'.join([f'{i + 1}. {emailsList[i]}' for i in range(len(emailsList))])
         update.message.reply_text(emails, reply_markup=self.keyboard_add_db_Emails()
-                                  )  # Отправляем сообщение пользователю
+                                  )  # ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÐ¼ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŽ
         logger.info(f'Stop {self.findEmails.__name__}')
-        return ConversationHandler.END  # self.commands.add_db_Emails.state_point # Завершаем работу обработчика диалога
+        return ConversationHandler.END  # self.commands.add_db_Emails.state_point # Ð—Ð°Ð²ÐµÑ€ÑˆÐ°ÐµÐ¼ Ñ€Ð°Ð±Ð¾Ñ‚Ñƒ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ° Ð´Ð¸Ð°Ð»Ð¾Ð³Ð°
 
     def command_Add_db_Emails(self, update: Update, context):
         logger.info(f'Start {self.command_Add_db_Emails.__name__}')
@@ -485,49 +503,49 @@ class TelegramBot:
                 cursor.execute(f"INSERT INTO Emails (mail) VALUES ('{mail}');")
             connection.commit()
             update.message.reply_text(
-                    f'Данные успешно добавлены в БД',
-                    reply_markup=self.keyboard_menu_main()  # Отправляем клавиатуру с кнопками
+                    f'Ð”Ð°Ð½Ð½Ñ‹Ðµ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ñ‹ Ð² Ð‘Ð”',
+                    reply_markup=self.keyboard_menu_main()  # ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÐ¼ ÐºÐ»Ð°Ð²Ð¸Ð°Ñ‚ÑƒÑ€Ñƒ Ñ ÐºÐ½Ð¾Ð¿ÐºÐ°Ð¼Ð¸
                     )
-            logging.info("Команда успешно выполнена")
+            logging.info("ÐšÐ¾Ð¼Ð°Ð½Ð´Ð° ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð°")
         except (Exception, psycopg2.Error) as error:
-            logging.error(f"Ошибка при работе с PostgreSQL: {error}")
+            logging.error(f"ÐžÑˆÐ¸Ð±ÐºÐ° Ð¿Ñ€Ð¸ Ñ€Ð°Ð±Ð¾Ñ‚Ðµ Ñ PostgreSQL: {error}")
         finally:
             if connection:
                 cursor.close()
                 connection.close()
-                logging.info("Соединение с PostgreSQL закрыто")
+                logging.info("Ð¡Ð¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ Ñ PostgreSQL Ð·Ð°ÐºÑ€Ñ‹Ñ‚Ð¾")
         logger.info(f'Stop {self.command_Add_db_Emails.__name__}')
         return ConversationHandler.END
 
     def command_FindPhoneNumbers(self, update: Update, context):
         """
-        Бот вывод список найденных номеров телефона
+        Ð‘Ð¾Ñ‚ Ð²Ñ‹Ð²Ð¾Ð´ ÑÐ¿Ð¸ÑÐ¾Ðº Ð½Ð°Ð¹Ð´ÐµÐ½Ð½Ñ‹Ñ… Ð½Ð¾Ð¼ÐµÑ€Ð¾Ð² Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð°
         """
         logger.info(f'Start {self.command_FindPhoneNumbers.__name__}')
-        update.message.reply_text('Введите текст для поиска телефонных номеров: ',
+        update.message.reply_text('Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ‚ÐµÐºÑÑ‚ Ð´Ð»Ñ Ð¿Ð¾Ð¸ÑÐºÐ° Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð½Ñ‹Ñ… Ð½Ð¾Ð¼ÐµÑ€Ð¾Ð²: ',
                                   reply_markup=self.keyboard_menu_cancel()
-                                  # Кнопка для отмены поиска
+                                  # ÐšÐ½Ð¾Ð¿ÐºÐ° Ð´Ð»Ñ Ð¾Ñ‚Ð¼ÐµÐ½Ñ‹ Ð¿Ð¾Ð¸ÑÐºÐ°
                                   )
         logger.info(f'Stop {self.command_FindPhoneNumbers.__name__}')
         return self.commands.findPhoneNumbers.state_point
 
     def findPhoneNumbers(self, update: Update, context):
         logger.info(f'Start {self.findPhoneNumbers.__name__}')
-        user_input = update.message.text  # Получаем текст, содержащий (или нет) номера телефонов
+        user_input = update.message.text  # ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ñ‚ÐµÐºÑÑ‚, ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‰Ð¸Ð¹ (Ð¸Ð»Ð¸ Ð½ÐµÑ‚) Ð½Ð¾Ð¼ÐµÑ€Ð° Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð¾Ð²
         """
-        Различные варианты записи номеров телефона.
+        Ð Ð°Ð·Ð»Ð¸Ñ‡Ð½Ñ‹Ðµ Ð²Ð°Ñ€Ð¸Ð°Ð½Ñ‚Ñ‹ Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð½Ð¾Ð¼ÐµÑ€Ð¾Ð² Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð°.
         - 8XXXXXXXXXX,
         - 8(XXX)XXXXXXX,
         - 8 XXX XXX XX XX,
         - 8 (XXX) XXX XX XX,
         - 8-XXX-XXX-XX-XX.
-        Также вместо ‘8’ на первом месте может быть ‘+7’.
+        Ð¢Ð°ÐºÐ¶Ðµ Ð²Ð¼ÐµÑÑ‚Ð¾ â€˜8â€™ Ð½Ð° Ð¿ÐµÑ€Ð²Ð¾Ð¼ Ð¼ÐµÑÑ‚Ðµ Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ‹Ñ‚ÑŒ â€˜+7â€™.
         """
-        phoneNumRegex = re.compile(r'(\+7|8)(\s?[(-]?\d{3}[)-]?\s?\d{3}-?\s?\d{2}-?\s?\d{2})')  # формат
-        phoneNumberList = phoneNumRegex.findall(user_input)  # Ищем номера телефонов
-        if not phoneNumberList:  # Обрабатываем случай, когда номеров телефонов нет
-            update.message.reply_text('Телефонные номера не найдены', reply_markup=self.keyboard_menu_cancel())
-            return  # Завершаем выполнение функции
+        phoneNumRegex = re.compile(r'(\+7|8)(\s?[(-]?\d{3}[)-]?\s?\d{3}-?\s?\d{2}-?\s?\d{2})')  # Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚
+        phoneNumberList = phoneNumRegex.findall(user_input)  # Ð˜Ñ‰ÐµÐ¼ Ð½Ð¾Ð¼ÐµÑ€Ð° Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð¾Ð²
+        if not phoneNumberList:  # ÐžÐ±Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°ÐµÐ¼ ÑÐ»ÑƒÑ‡Ð°Ð¹, ÐºÐ¾Ð³Ð´Ð° Ð½Ð¾Ð¼ÐµÑ€Ð¾Ð² Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð¾Ð² Ð½ÐµÑ‚
+            update.message.reply_text('Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½Ð½Ñ‹Ðµ Ð½Ð¾Ð¼ÐµÑ€Ð° Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½Ñ‹', reply_markup=self.keyboard_menu_cancel())
+            return  # Ð—Ð°Ð²ÐµÑ€ÑˆÐ°ÐµÐ¼ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸
         self.phones = '\n'.join(
                 [f'{phoneNumberList[i][0] + phoneNumberList[i][1]}' for i in range(len(phoneNumberList))]
                 )
@@ -535,9 +553,9 @@ class TelegramBot:
                 [f'{i + 1}. {phoneNumberList[i][0] + phoneNumberList[i][1]}' for i in range(len(phoneNumberList))]
                 )
         update.message.reply_text(phones, reply_markup=self.keyboard_add_db_Phones()
-                                  )  # Отправляем сообщение пользователю
+                                  )  # ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÐ¼ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŽ
         logger.info(f'Stop {self.findPhoneNumbers.__name__}')
-        return ConversationHandler.END  # Завершаем работу обработчика диалога
+        return ConversationHandler.END  # Ð—Ð°Ð²ÐµÑ€ÑˆÐ°ÐµÐ¼ Ñ€Ð°Ð±Ð¾Ñ‚Ñƒ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ° Ð´Ð¸Ð°Ð»Ð¾Ð³Ð°
 
     def command_Add_db_Phones(self, update: Update, context):
         logger.info(f'Start {self.command_Add_db_Phones.__name__}')
@@ -566,57 +584,146 @@ class TelegramBot:
                 cursor.execute(f"INSERT INTO Phones (phone) VALUES ('{phone}');")
             connection.commit()
             update.message.reply_text(
-                    f'Данные успешно добавлены в БД',
-                    reply_markup=self.keyboard_menu_main()  # Отправляем клавиатуру с кнопками
+                    f'Ð”Ð°Ð½Ð½Ñ‹Ðµ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ñ‹ Ð² Ð‘Ð”',
+                    reply_markup=self.keyboard_menu_main()  # ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÐ¼ ÐºÐ»Ð°Ð²Ð¸Ð°Ñ‚ÑƒÑ€Ñƒ Ñ ÐºÐ½Ð¾Ð¿ÐºÐ°Ð¼Ð¸
                     )
-            logging.info("Команда успешно выполнена")
+            logging.info("ÐšÐ¾Ð¼Ð°Ð½Ð´Ð° ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð°")
         except (Exception, psycopg2.Error) as error:
-            logging.error(f"Ошибка при работе с PostgreSQL: {error}")
+            logging.error(f"ÐžÑˆÐ¸Ð±ÐºÐ° Ð¿Ñ€Ð¸ Ñ€Ð°Ð±Ð¾Ñ‚Ðµ Ñ PostgreSQL: {error}")
         finally:
             if connection:
                 cursor.close()
                 connection.close()
-                logging.info("Соединение с PostgreSQL закрыто")
+                logging.info("Ð¡Ð¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ Ñ PostgreSQL Ð·Ð°ÐºÑ€Ñ‹Ñ‚Ð¾")
         logger.info(f'Stop {self.command_Add_db_Phones.__name__}')
         return ConversationHandler.END
+    
+    def command_GetEmails(self, update: Update, context):
+        logger.info(f'Start {self.command_GetEmails.__name__}')
+        host = os.getenv('DB_HOST')
+        logger.info('Get DB_HOST')
+        port = os.getenv('DB_PORT')
+        logger.info('Get DB_PORT')
+        username = os.getenv('DB_USER')
+        logger.info('Get DB_USER')
+        password = os.getenv('DB_PASSWORD')
+        logger.info('Get DB_PASSWORD')
+        database = os.getenv('DB_DATABASE')
+        logger.info('Get DB_DATABASE')
+        connection, data = None, 'test'
+        try:
+            connection = psycopg2.connect(user=username,
+                                          password=password,
+                                          host=host,
+                                          port=port,
+                                          database=database
+                                          )
+
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM Emails;")
+            data = cursor.fetchall()
+            #for row in data:
+                #print(row)  
+            connection.commit()
+            #emails = re.findall(r'"([^"]+)"', data)
+            #data = '\n'.join([lst[0] for lst in data])
+            update.message.reply_text(
+                    data,
+                    reply_markup=self.keyboard_menu_main()  # ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÐ¼ ÐºÐ»Ð°Ð²Ð¸Ð°Ñ‚ÑƒÑ€Ñƒ Ñ ÐºÐ½Ð¾Ð¿ÐºÐ°Ð¼Ð¸
+                    )
+            logging.info("ÐšÐ¾Ð¼Ð°Ð½Ð´Ð° ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð°")
+        except (Exception, psycopg2.Error) as error:
+            logging.error(f"ÐžÑˆÐ¸Ð±ÐºÐ° Ð¿Ñ€Ð¸ Ñ€Ð°Ð±Ð¾Ñ‚Ðµ Ñ PostgreSQL: {error}")
+        finally:
+            if connection:
+                cursor.close()
+                connection.close()
+                logging.info("Ð¡Ð¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ Ñ PostgreSQL Ð·Ð°ÐºÑ€Ñ‹Ñ‚Ð¾")
+        logger.info(f'Stop {self.command_GetEmails.__name__}')
+        return ConversationHandler.END
+        
+    def command_GetPhones(self, update: Update, context):
+        logger.info(f'Start {self.command_GetPhones.__name__}')
+        host = os.getenv('DB_HOST')
+        logger.info('Get DB_HOST')
+        port = os.getenv('DB_PORT')
+        logger.info('Get DB_PORT')
+        username = os.getenv('DB_USER')
+        logger.info('Get DB_USER')
+        password = os.getenv('DB_PASSWORD')
+        logger.info('Get DB_PASSWORD')
+        database = os.getenv('DB_DATABASE')
+        logger.info('Get DB_DATABASE')
+        connection, data = None, 'test'
+        try:
+            connection = psycopg2.connect(user=username,
+                                          password=password,
+                                          host=host,
+                                          port=port,
+                                          database=database
+                                          )
+
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM Phones;")
+            data = cursor.fetchall()
+            #for row in data:
+                #print(row)  
+            connection.commit()
+            #data = '\n'.join([lst[0] for lst in data])
+            #phones = re.findall(r'"([^"]+)"', input_string)
+            update.message.reply_text(
+                    data,
+                    reply_markup=self.keyboard_menu_main()  # ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÐ¼ ÐºÐ»Ð°Ð²Ð¸Ð°Ñ‚ÑƒÑ€Ñƒ Ñ ÐºÐ½Ð¾Ð¿ÐºÐ°Ð¼Ð¸
+                    )
+            logging.info("ÐšÐ¾Ð¼Ð°Ð½Ð´Ð° ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð°")
+        except (Exception, psycopg2.Error) as error:
+            logging.error(f"ÐžÑˆÐ¸Ð±ÐºÐ° Ð¿Ñ€Ð¸ Ñ€Ð°Ð±Ð¾Ñ‚Ðµ Ñ PostgreSQL: {error}")
+        finally:
+            if connection:
+                cursor.close()
+                connection.close()
+                logging.info("Ð¡Ð¾ÐµÐ´Ð¸Ð½ÐµÐ½Ð¸Ðµ Ñ PostgreSQL Ð·Ð°ÐºÑ€Ñ‹Ñ‚Ð¾")
+        logger.info(f'Stop {self.command_GetPhones.__name__}')
+        return ConversationHandler.END
+
 
     def command_VerifyPassword(self, update: Update, context):
         """
-        Бот выводит информацию о сложности пароля
+        Ð‘Ð¾Ñ‚ Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ñ‚ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ Ð¾ ÑÐ»Ð¾Ð¶Ð½Ð¾ÑÑ‚Ð¸ Ð¿Ð°Ñ€Ð¾Ð»Ñ
         """
         logger.info(f'Start {self.command_VerifyPassword.__name__}')
-        update.message.reply_text('Введите пароль для оценки сложности: ',
+        update.message.reply_text('Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ Ð´Ð»Ñ Ð¾Ñ†ÐµÐ½ÐºÐ¸ ÑÐ»Ð¾Ð¶Ð½Ð¾ÑÑ‚Ð¸: ',
                                   reply_markup=self.keyboard_menu_cancel()
-                                  # Кнопка для отмены поиска
+                                  # ÐšÐ½Ð¾Ð¿ÐºÐ° Ð´Ð»Ñ Ð¾Ñ‚Ð¼ÐµÐ½Ñ‹ Ð¿Ð¾Ð¸ÑÐºÐ°
                                   )
         logger.info(f'Stop {self.command_VerifyPassword.__name__}')
         return self.commands.verifyPassword.state_point
 
     def verifyPassword(self, update: Update, context):
         logger.info(f'Start {self.verifyPassword.__name__}')
-        user_input = update.message.text  # Получаем текст, содержащий (или нет) номера телефонов
+        user_input = update.message.text  # ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ñ‚ÐµÐºÑÑ‚, ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‰Ð¸Ð¹ (Ð¸Ð»Ð¸ Ð½ÐµÑ‚) Ð½Ð¾Ð¼ÐµÑ€Ð° Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½Ð¾Ð²
 
         """
-        Требования к паролю:
-        - Пароль должен содержать не менее восьми символов.
-        - Пароль должен включать как минимум одну заглавную букву (A–Z).
-        - Пароль должен включать хотя бы одну строчную букву (a–z).
-        - Пароль должен включать хотя бы одну цифру (0–9).
-        - Пароль должен включать хотя бы один специальный символ, такой как !@#$%^&*().
+        Ð¢Ñ€ÐµÐ±Ð¾Ð²Ð°Ð½Ð¸Ñ Ðº Ð¿Ð°Ñ€Ð¾Ð»ÑŽ:
+        - ÐŸÐ°Ñ€Ð¾Ð»ÑŒ Ð´Ð¾Ð»Ð¶ÐµÐ½ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‚ÑŒ Ð½Ðµ Ð¼ÐµÐ½ÐµÐµ Ð²Ð¾ÑÑŒÐ¼Ð¸ ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð².
+        - ÐŸÐ°Ñ€Ð¾Ð»ÑŒ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð²ÐºÐ»ÑŽÑ‡Ð°Ñ‚ÑŒ ÐºÐ°Ðº Ð¼Ð¸Ð½Ð¸Ð¼ÑƒÐ¼ Ð¾Ð´Ð½Ñƒ Ð·Ð°Ð³Ð»Ð°Ð²Ð½ÑƒÑŽ Ð±ÑƒÐºÐ²Ñƒ (Aâ€“Z).
+        - ÐŸÐ°Ñ€Ð¾Ð»ÑŒ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð²ÐºÐ»ÑŽÑ‡Ð°Ñ‚ÑŒ Ñ…Ð¾Ñ‚Ñ Ð±Ñ‹ Ð¾Ð´Ð½Ñƒ ÑÑ‚Ñ€Ð¾Ñ‡Ð½ÑƒÑŽ Ð±ÑƒÐºÐ²Ñƒ (aâ€“z).
+        - ÐŸÐ°Ñ€Ð¾Ð»ÑŒ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð²ÐºÐ»ÑŽÑ‡Ð°Ñ‚ÑŒ Ñ…Ð¾Ñ‚Ñ Ð±Ñ‹ Ð¾Ð´Ð½Ñƒ Ñ†Ð¸Ñ„Ñ€Ñƒ (0â€“9).
+        - ÐŸÐ°Ñ€Ð¾Ð»ÑŒ Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð²ÐºÐ»ÑŽÑ‡Ð°Ñ‚ÑŒ Ñ…Ð¾Ñ‚Ñ Ð±Ñ‹ Ð¾Ð´Ð¸Ð½ ÑÐ¿ÐµÑ†Ð¸Ð°Ð»ÑŒÐ½Ñ‹Ð¹ ÑÐ¸Ð¼Ð²Ð¾Ð», Ñ‚Ð°ÐºÐ¾Ð¹ ÐºÐ°Ðº !@#$%^&*().
         """
 
         passwdRegex = re.compile(r'(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}')
 
         passwdList = passwdRegex.search(user_input)
 
-        if not passwdList:  # Обрабатываем случай, когда совпадений нет
-            update.message.reply_text('Пароль простой', reply_markup=self.keyboard_menu_cancel())
-            return  # Завершаем выполнение функции
+        if not passwdList:  # ÐžÐ±Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°ÐµÐ¼ ÑÐ»ÑƒÑ‡Ð°Ð¹, ÐºÐ¾Ð³Ð´Ð° ÑÐ¾Ð²Ð¿Ð°Ð´ÐµÐ½Ð¸Ð¹ Ð½ÐµÑ‚
+            update.message.reply_text('ÐŸÐ°Ñ€Ð¾Ð»ÑŒ Ð¿Ñ€Ð¾ÑÑ‚Ð¾Ð¹', reply_markup=self.keyboard_menu_cancel())
+            return  # Ð—Ð°Ð²ÐµÑ€ÑˆÐ°ÐµÐ¼ Ð²Ñ‹Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸
 
-        update.message.reply_text('Пароль сложный', reply_markup=self.keyboard_menu_cancel()
-                                  )  # Отправляем сообщение пользователю
+        update.message.reply_text('ÐŸÐ°Ñ€Ð¾Ð»ÑŒ ÑÐ»Ð¾Ð¶Ð½Ñ‹Ð¹', reply_markup=self.keyboard_menu_cancel()
+                                  )  # ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÐ¼ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŽ
         logger.info(f'Stop {self.verifyPassword.__name__}')
-        return  # ConversationHandler.END  # Завершаем работу обработчика диалога
+        return  # ConversationHandler.END  # Ð—Ð°Ð²ÐµÑ€ÑˆÐ°ÐµÐ¼ Ñ€Ð°Ð±Ð¾Ñ‚Ñƒ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ° Ð´Ð¸Ð°Ð»Ð¾Ð³Ð°
 
     def getHostInfo(self, host='RM_HOST', port='RM_PORT', username='RM_USER', password='RM_PASSWORD', command="uname"):
         logger.info(f"Start {self.getHostInfo.__name__}")
@@ -716,11 +823,11 @@ class TelegramBot:
 
     def command_GetAptList(self, update: Update, context):
         logger.info(f'Start {self.command_GetAptList.__name__}')
-        update.message.reply_text('Выберите опцию:', reply_markup=self.keyboard_apt_packages())
+        update.message.reply_text('Ð’Ñ‹Ð±ÐµÑ€Ð¸Ñ‚Ðµ Ð¾Ð¿Ñ†Ð¸ÑŽ:', reply_markup=self.keyboard_apt_packages())
         logger.info(f'Stop {self.command_GetAptList.__name__}')
         return self.commands.getAptList.state_point
 
-    # Команда для получения списка всех установленных пакетов
+    # ÐšÐ¾Ð¼Ð°Ð½Ð´Ð° Ð´Ð»Ñ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ ÑÐ¿Ð¸ÑÐºÐ° Ð²ÑÐµÑ… ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½Ð½Ñ‹Ñ… Ð¿Ð°ÐºÐµÑ‚Ð¾Ð²
     def get_apt_list(self):
         logger.info(f'Start {self.get_apt_list.__name__}')
         text = self.getHostInfo(command="dpkg -l | cat")
@@ -736,9 +843,9 @@ class TelegramBot:
 
     def command_GetOnePackageInfo(self, update: Update, context):
         logger.info(f'Start {self.command_GetOnePackageInfo.__name__}')
-        update.message.reply_text('Введите название пакета:',
+        update.message.reply_text('Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð¿Ð°ÐºÐµÑ‚Ð°:',
                                   reply_markup=self.keyboard_apt_packages()
-                                  # Кнопка для отмены поиска
+                                  # ÐšÐ½Ð¾Ð¿ÐºÐ° Ð´Ð»Ñ Ð¾Ñ‚Ð¼ÐµÐ½Ñ‹ Ð¿Ð¾Ð¸ÑÐºÐ°
                                   )
         logger.info(f'Stop {self.command_GetOnePackageInfo.__name__}')
         return self.commands.getOnePackageInfo.state_point
@@ -840,18 +947,18 @@ class TelegramBot:
     def main(self):
         logger.info(f'Start {self.main.__name__}')
         updater = Updater(self.__tm_token, use_context=True)
-        # Получаем диспетчер для регистрации обработчиков
+        # ÐŸÐ¾Ð»ÑƒÑ‡Ð°ÐµÐ¼ Ð´Ð¸ÑÐ¿ÐµÑ‚Ñ‡ÐµÑ€ Ð´Ð»Ñ Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ð¸ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ¾Ð²
         dp = updater.dispatcher
 
-        ## Регистрируем обработчики команд
+        ## Ð ÐµÐ³Ð¸ÑÑ‚Ñ€Ð¸Ñ€ÑƒÐµÐ¼ Ð¾Ð±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ¸ ÐºÐ¾Ð¼Ð°Ð½Ð´
 
-        # Обработчик команды /start
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /start
         dp.add_handler(CommandHandler(self.commands.start.command, self.commands.start.callback))
 
-        # Обработчик команды /help
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /help
         dp.add_handler(CommandHandler(self.commands.help.command, self.commands.help.callback))
 
-        # Обработчик команды /findEmails
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /findEmails
         dp.add_handler(ConversationHandler(
                 entry_points=[CommandHandler(self.commands.findEmails.state_point,
                                              self.commands.findEmails.callback
@@ -864,7 +971,7 @@ class TelegramBot:
                 )
                 )
 
-        # Обработчик команды /add_db_Emails
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /add_db_Emails
 
         dp.add_handler(ConversationHandler(
                 entry_points=[CommandHandler(self.commands.add_db_Emails.state_point,
@@ -880,8 +987,14 @@ class TelegramBot:
                            CommandHandler(self.commands.cancel.command, self.commands.cancel.callback)]
                 )
                 )
+        
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_emails
+        dp.add_handler(CommandHandler(self.commands.getEmails.command, self.commands.getEmails.callback))
+        
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_phones
+        dp.add_handler(CommandHandler(self.commands.getPhones.command, self.commands.getPhones.callback))
 
-        # Обработчик команды /findPhoneNumbers
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /findPhoneNumbers
         dp.add_handler(ConversationHandler(
                 entry_points=[CommandHandler(self.commands.findPhoneNumbers.state_point,
                                              self.commands.findPhoneNumbers.callback
@@ -894,7 +1007,7 @@ class TelegramBot:
                 )
                 )
 
-        # Обработчик команды /add_db_Phones
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /add_db_Phones
 
         dp.add_handler(ConversationHandler(
                 entry_points=[CommandHandler(self.commands.add_db_Phones.state_point,
@@ -911,7 +1024,7 @@ class TelegramBot:
                 )
                 )
 
-        # Обработчик команды /verifyPassword
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /verifyPassword
         dp.add_handler(ConversationHandler(
                 entry_points=[CommandHandler(self.commands.verifyPassword.state_point,
                                              self.commands.verifyPassword.callback
@@ -924,40 +1037,40 @@ class TelegramBot:
                 )
                 )
 
-        # Обработчик команды /get_release
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_release
         dp.add_handler(CommandHandler(self.commands.getRelease.command, self.commands.getRelease.callback))
 
-        # Обработчик команды /get_uname
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_uname
         dp.add_handler(CommandHandler(self.commands.getUname.command, self.commands.getUname.callback))
 
-        # Обработчик команды /get_uptime
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_uptime
         dp.add_handler(CommandHandler(self.commands.getUptime.command, self.commands.getUptime.callback))
 
-        # Обработчик команды /get_df
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_df
         dp.add_handler(CommandHandler(self.commands.getDF.command, self.commands.getDF.callback))
 
-        # Обработчик команды /get_free
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_free
         dp.add_handler(CommandHandler(self.commands.getFree.command, self.commands.getFree.callback))
 
-        # Обработчик команды /get_mpstat
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_mpstat
         dp.add_handler(CommandHandler(self.commands.getMpstat.command, self.commands.getMpstat.callback))
 
-        # Обработчик команды /get_w
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_w
         dp.add_handler(CommandHandler(self.commands.getW.command, self.commands.getW.callback))
 
-        # Обработчик команды /get_auths
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_auths
         dp.add_handler(CommandHandler(self.commands.getAuths.command, self.commands.getAuths.callback))
 
-        # Обработчик команды /get_critical
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_critical
         dp.add_handler(CommandHandler(self.commands.getCritical.command, self.commands.getCritical.callback))
 
-        # Обработчик команды /get_ps
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_ps
         dp.add_handler(CommandHandler(self.commands.getPS.command, self.commands.getPS.callback))
 
-        # Обработчик команды /get_SS
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_SS
         dp.add_handler(CommandHandler(self.commands.getSS.command, self.commands.getSS.callback))
 
-        # Обработчик команды /get_apt_list
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_apt_list
         dp.add_handler(ConversationHandler(
                 entry_points=[
                         CommandHandler(self.commands.getAptList.state_point,
@@ -981,22 +1094,22 @@ class TelegramBot:
                 )
                 )
 
-        # Обработчик команды /get_services
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_services
         dp.add_handler(CommandHandler(self.commands.getServices.command, self.commands.getServices.callback))
 
-        # Обработчик команды /get_rep_logs
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ /get_rep_logs
         dp.add_handler(CommandHandler(self.commands.getReplLogs.command, self.commands.getReplLogs.callback))
 
-        # Обработчик текстовых сообщений /echo
+        # ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸Ðº Ñ‚ÐµÐºÑÑ‚Ð¾Ð²Ñ‹Ñ… ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ð¹ /echo
         dp.add_handler(MessageHandler(Filters.text & ~Filters.command, self.commands.echo.callback))
 
-        # Запускаем бота
+        # Ð—Ð°Ð¿ÑƒÑÐºÐ°ÐµÐ¼ Ð±Ð¾Ñ‚Ð°
         updater.start_polling()
 
-        # Отправляем кнопку /start автоматически при запуске бота
+        # ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð»ÑÐµÐ¼ ÐºÐ½Ð¾Ð¿ÐºÑƒ /start Ð°Ð²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸ Ð¿Ñ€Ð¸ Ð·Ð°Ð¿ÑƒÑÐºÐµ Ð±Ð¾Ñ‚Ð°
         self.command_Start(context=updater)
 
-        # Останавливаем бота при нажатии Ctrl+C
+        # ÐžÑÑ‚Ð°Ð½Ð°Ð²Ð»Ð¸Ð²Ð°ÐµÐ¼ Ð±Ð¾Ñ‚Ð° Ð¿Ñ€Ð¸ Ð½Ð°Ð¶Ð°Ñ‚Ð¸Ð¸ Ctrl+C
         updater.idle()
 
         logger.info(f'Stop {self.main.__name__}')
